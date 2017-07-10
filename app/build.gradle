@@ -3,6 +3,7 @@ apply plugin: 'com.android.application'
 project.ext {
     supportLibraryVersion = "25.2.0"
     daggerVersion = "2.11"
+    butterKnifeVersion = "8.5.1"
 }
 
 android {
@@ -37,4 +38,8 @@ dependencies {
     compile "com.google.dagger:dagger-android-support:$project.daggerVersion"
     // if you are not using support library, include this instead
     compile "com.google.dagger:dagger-android:$project.daggerVersion"
+
+    // ButterKnife
+    compile "com.jakewharton:butterknife:$project.butterKnifeVersion"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$project.butterKnifeVersion"
 }
