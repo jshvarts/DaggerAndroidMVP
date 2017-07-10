@@ -8,7 +8,14 @@
     tools:context="com.jshvarts.daggerandroidsampleapp.lobby.LobbyActivity">
 
     <TextView
-        android:id="@+id/hello_from_common"
+        android:id="@+id/common_hello"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp" />
+
+    <TextView
+        android:id="@+id/lobby_hello"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"

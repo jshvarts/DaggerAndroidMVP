@@ -15,11 +15,17 @@ import dagger.android.AndroidInjection;
 
 public class LobbyActivity extends AppCompatActivity {
 
-    @BindView(R.id.hello_from_common)
-    protected TextView helloFromCommonTextView;
+    @BindView(R.id.common_hello)
+    protected TextView commonHelloTextView;
+
+    @BindView(R.id.lobby_hello)
+    protected TextView lobbyHelloTextView;
 
     @Inject
-    protected CommonHelloService commonRepository;
+    protected CommonHelloService commonHelloService;
+
+    @Inject
+    protected LobbyHelloService lobbyHelloService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +41,15 @@ public class LobbyActivity extends AppCompatActivity {
         super.onResume();
 
         sayCommonHello();
+
+        sayLobbyHello();
     }
 
     private void sayCommonHello() {
-        String helloText = commonRepository.sayHello();
-        helloFromCommonTextView.setText(helloText);
+        commonHelloTextView.setText(commonHelloService.sayHello());
+    }
+
+    private void sayLobbyHello() {
+        lobbyHelloTextView.setText(lobbyHelloService.sayHello());
     }
 }

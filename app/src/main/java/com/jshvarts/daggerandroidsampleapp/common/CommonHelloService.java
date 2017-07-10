@@ -1,5 +1,7 @@
 package com.jshvarts.daggerandroidsampleapp.common;
 
-public interface CommonHelloService {
-    String sayHello();
+public class CommonHelloService {
+    public String sayHello() {
+        return "Hello from CommonHelloService";
+    }
 }

@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.jshvarts.daggerandroidsampleapp.App;
 import com.jshvarts.daggerandroidsampleapp.common.CommonHelloService;
-import com.jshvarts.daggerandroidsampleapp.common.CommonHelloServiceImpl;
 
 import javax.inject.Singleton;
 
@@ -24,7 +23,7 @@ public class AppModule {
 
     @Singleton
     @Provides
-    CommonHelloService provideCommonRepository() {
-        return new CommonHelloServiceImpl();
+    CommonHelloService provideCommonHelloService() {
+        return new CommonHelloService();
     }
 }

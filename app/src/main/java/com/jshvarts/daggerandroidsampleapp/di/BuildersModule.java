@@ -1,6 +1,7 @@
 package com.jshvarts.daggerandroidsampleapp.di;
 
 import com.jshvarts.daggerandroidsampleapp.lobby.LobbyActivity;
+import com.jshvarts.daggerandroidsampleapp.lobby.LobbyActivityModule;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -11,7 +12,7 @@ import dagger.android.ContributesAndroidInjector;
 @Module
 public abstract class BuildersModule {
 
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = LobbyActivityModule.class)
     abstract LobbyActivity bindLobbyActivity();
 
     // Add bindings for other sub-components here
