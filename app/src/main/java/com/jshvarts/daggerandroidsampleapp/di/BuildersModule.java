@@ -18,6 +18,8 @@ public abstract class BuildersModule {
     abstract LobbyActivity bindLobbyActivity();
 
     @ContributesAndroidInjector(modules = LobbyFragmentModule.class)
+    // or you can gain access to lobby dependencies from fragment via:
+    // @ContributesAndroidInjector(modules = {LobbyFragmentModule.class, LobbyActivityModule.class})
     abstract LobbyFragment bindLobbyFragment();
 
     // Add bindings for other sub-components here
