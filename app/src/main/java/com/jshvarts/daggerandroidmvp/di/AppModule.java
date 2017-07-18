@@ -1,9 +1,9 @@
-package com.jshvarts.daggerandroidsampleapp.di;
+package com.jshvarts.daggerandroidmvp.di;
 
 import android.content.Context;
 
-import com.jshvarts.daggerandroidsampleapp.App;
-import com.jshvarts.daggerandroidsampleapp.common.CommonHelloService;
+import com.jshvarts.daggerandroidmvp.App;
+import com.jshvarts.daggerandroidmvp.common.CommonGreetingRepository;
 
 import javax.inject.Singleton;
 
@@ -23,7 +23,7 @@ public class AppModule {
 
     @Singleton
     @Provides
-    CommonHelloService provideCommonHelloService() {
-        return new CommonHelloService();
+    CommonGreetingRepository provideCommonHelloService() {
+        return new CommonGreetingRepository();
     }
 }

@@ -4,25 +4,37 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.jshvarts.daggerandroidsampleapp.lobby.LobbyActivity">
+    tools:context="com.jshvarts.daggerandroidmvp.lobby.LobbyActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="30dp">
+
+        <Button
+            android:id="@+id/common_greeting_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Common Greeting"/>
+
+        <Button
+            android:id="@+id/lobby_greeting_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lobby Greeting"/>
+    </LinearLayout>
 
     <TextView
-        android:id="@+id/common_hello"
+        android:id="@+id/common_greeting_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp" />
 
     <TextView
-        android:id="@+id/lobby_hello"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp" />
-
-    <fragment
-        android:id="@+id/lobby_fragment"
-        android:name="com.jshvarts.daggerandroidsampleapp.lobby.LobbyFragment"
+        android:id="@+id/lobby_greeting_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"

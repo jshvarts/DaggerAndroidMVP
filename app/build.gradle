@@ -1,14 +1,17 @@
 apply plugin: 'com.android.application'
 
 project.ext {
-    supportLibraryVersion = "25.2.0"
+    supportLibraryVersion = "25.4.0"
     daggerVersion = "2.11"
     butterKnifeVersion = "8.5.1"
+    lifecycleVersion = "1.0.0-alpha3"
+    rxJavaVersion = "2.1.0"
+    rxAndroidVersion = "2.0.1"
 }
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    buildToolsVersion "26.0.0"
     defaultConfig {
         applicationId "com.jshvarts.daggerandroidsampleapp"
         minSdkVersion 19
@@ -16,6 +19,11 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        compileOptions {
+            sourceCompatibility JavaVersion.VERSION_1_8
+            targetCompatibility JavaVersion.VERSION_1_8
+        }
     }
     buildTypes {
         release {
@@ -42,4 +50,13 @@ dependencies {
     // ButterKnife
     compile "com.jakewharton:butterknife:$project.butterKnifeVersion"
     annotationProcessor "com.jakewharton:butterknife-compiler:$project.butterKnifeVersion"
+
+    // Lifecycle
+    compile "android.arch.lifecycle:runtime:$project.lifecycleVersion"
+    compile "android.arch.lifecycle:extensions:$project.lifecycleVersion"
+    annotationProcessor "android.arch.lifecycle:compiler:$project.lifecycleVersion"
+
+    // ReactiveX
+    compile "io.reactivex.rxjava2:rxjava:$project.rxJavaVersion"
+    compile "io.reactivex.rxjava2:rxandroid:$project.rxAndroidVersion"
 }

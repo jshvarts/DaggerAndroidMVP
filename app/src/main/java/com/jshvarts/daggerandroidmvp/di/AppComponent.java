@@ -1,6 +1,6 @@
-package com.jshvarts.daggerandroidsampleapp.di;
+package com.jshvarts.daggerandroidmvp.di;
 
-import com.jshvarts.daggerandroidsampleapp.App;
+import com.jshvarts.daggerandroidmvp.App;
 
 import javax.inject.Singleton;
 
