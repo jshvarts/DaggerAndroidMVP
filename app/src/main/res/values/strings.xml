@@ -1,5 +1,4 @@
 <resources>
     <string name="app_name">DaggerAndroidMVP</string>
-    <string name="common_greeting_error">Unable to load common greeting.</string>
-    <string name="lobby_greeting_error">Unable to load lobby greeting.</string>
+    <string name="greeting_error">Unable to load greeting.</string>
 </resources>

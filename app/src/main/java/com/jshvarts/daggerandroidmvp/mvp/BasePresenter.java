@@ -4,13 +4,23 @@ import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleObserver;
 import android.arch.lifecycle.OnLifecycleEvent;
 import android.support.annotation.CallSuper;
-import android.util.Log;
+
+import com.jakewharton.rxrelay2.BehaviorRelay;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import timber.log.Timber;
 
 public abstract class BasePresenter implements LifecycleObserver {
-    private static final String LOG_TAG = BasePresenter.class.getSimpleName();
+
+    public enum RequestState {
+        IDLE,
+        LOADING,
+        COMPLETE,
+        ERROR
+    }
+
+    protected BehaviorRelay<RequestState> requestStateObserver = BehaviorRelay.createDefault(RequestState.IDLE);
 
     private CompositeDisposable disposables = new CompositeDisposable();
 
@@ -20,7 +30,7 @@ public abstract class BasePresenter implements LifecycleObserver {
     @CallSuper
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     protected void setup() {
-        Log.d(LOG_TAG, "lifecycle resume callback.");
+        Timber.d("lifecycle resume callback.");
     }
 
     /**
@@ -29,8 +39,7 @@ public abstract class BasePresenter implements LifecycleObserver {
     @CallSuper
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     protected void cleanup() {
-        Log.d(LOG_TAG, "lifecycle destroy callback.");
-        disposables.dispose();
+        Timber.d("lifecycle destroy callback.");
     }
 
     protected void addDisposable(Disposable disposable) {

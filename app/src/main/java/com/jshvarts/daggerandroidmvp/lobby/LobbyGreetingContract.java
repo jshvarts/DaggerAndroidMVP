@@ -2,14 +2,20 @@ package com.jshvarts.daggerandroidmvp.lobby;
 
 interface LobbyGreetingContract {
     interface LobbyView {
+        // button events
         void onCommonGreetingButtonClicked();
         void onLobbyGreetingButtonClicked();
 
-        void displayCommonGreeting(String greeting);
-        void displayLobbyGreeting(String greeting);
+        // greeting text actions
+        void displayGreeting(String greeting);
+        void hideGreeting();
 
-        void displayCommonGreetingError(Throwable throwable);
-        void displayLobbyGreetingError(Throwable throwable);
+        // greeting error actions
+        void displayGreetingError(Throwable throwable);
+
+        // loading indicator actions
+        void displayLoadingIndicator();
+        void hideLoadingIndicator();
     }
 
     interface LobbyPresenter {

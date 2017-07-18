@@ -3,6 +3,8 @@ package com.jshvarts.daggerandroidmvp.lobby;
 import android.arch.lifecycle.LifecycleActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,20 +16,20 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import dagger.android.AndroidInjection;
+import timber.log.Timber;
 
 public class LobbyActivity extends LifecycleActivity implements LobbyGreetingContract.LobbyView {
 
-    private static final String BUNDLE_DATA_KEY_COMMON_GREETING = "commonGreeting";
-    private static final String BUNDLE_DATA_KEY_LOBBY_GREETING = "lobbyGreeting";
+    private static final String BUNDLE_DATA_KEY_GREETING = "greeting";
 
     @Inject
     LobbyPresenter presenter;
 
-    @BindView(R.id.common_greeting_textview)
-    TextView commonGreetingTextView;
+    @BindView(R.id.greeting_textview)
+    TextView greetingTextView;
 
-    @BindView(R.id.lobby_greeting_textview)
-    TextView lobbyGreetingTextView;
+    @BindView(R.id.loading_indicator)
+    ProgressBar loadingIndicator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,11 +45,8 @@ public class LobbyActivity extends LifecycleActivity implements LobbyGreetingCon
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        if (!TextUtils.isEmpty(commonGreetingTextView.getText())) {
-            outState.putCharSequence(BUNDLE_DATA_KEY_COMMON_GREETING, commonGreetingTextView.getText());
-        }
-        if (!TextUtils.isEmpty(lobbyGreetingTextView.getText())) {
-            outState.putCharSequence(BUNDLE_DATA_KEY_LOBBY_GREETING, lobbyGreetingTextView.getText());
+        if (!TextUtils.isEmpty(greetingTextView.getText())) {
+            outState.putCharSequence(BUNDLE_DATA_KEY_GREETING, greetingTextView.getText());
         }
     }
 
@@ -55,8 +54,7 @@ public class LobbyActivity extends LifecycleActivity implements LobbyGreetingCon
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         if (savedInstanceState != null) {
-            commonGreetingTextView.setText(savedInstanceState.getCharSequence(BUNDLE_DATA_KEY_COMMON_GREETING));
-            lobbyGreetingTextView.setText(savedInstanceState.getCharSequence(BUNDLE_DATA_KEY_LOBBY_GREETING));
+            greetingTextView.setText(savedInstanceState.getCharSequence(BUNDLE_DATA_KEY_GREETING));
         }
     }
 
@@ -73,22 +71,29 @@ public class LobbyActivity extends LifecycleActivity implements LobbyGreetingCon
     }
 
     @Override
-    public void displayCommonGreeting(String greeting) {
-        commonGreetingTextView.setText(greeting);
+    public void displayGreeting(String greeting) {
+        greetingTextView.setVisibility(View.VISIBLE);
+        greetingTextView.setText(greeting);
     }
 
     @Override
-    public void displayLobbyGreeting(String greeting) {
-        lobbyGreetingTextView.setText(greeting);
+    public void hideGreeting() {
+        greetingTextView.setVisibility(View.GONE);
     }
 
     @Override
-    public void displayCommonGreetingError(Throwable throwable) {
-        Toast.makeText(this, R.string.common_greeting_error, Toast.LENGTH_SHORT).show();
+    public void displayGreetingError(Throwable throwable) {
+        Timber.e(throwable.getMessage());
+        Toast.makeText(this, R.string.greeting_error, Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void displayLobbyGreetingError(Throwable throwable) {
-        Toast.makeText(this, R.string.lobby_greeting_error, Toast.LENGTH_SHORT).show();
+    public void displayLoadingIndicator() {
+        loadingIndicator.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideLoadingIndicator() {
+        loadingIndicator.setVisibility(View.GONE);
     }
 }
