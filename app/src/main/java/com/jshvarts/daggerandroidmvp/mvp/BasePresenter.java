@@ -1,17 +1,9 @@
 package com.jshvarts.daggerandroidmvp.mvp;
 
-import android.arch.lifecycle.Lifecycle;
-import android.arch.lifecycle.LifecycleObserver;
-import android.arch.lifecycle.OnLifecycleEvent;
-import android.support.annotation.CallSuper;
-
-import com.jakewharton.rxrelay2.BehaviorRelay;
-
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
-import timber.log.Timber;
 
-public abstract class BasePresenter implements LifecycleObserver {
+public abstract class BasePresenter<V> {
 
     public enum RequestState {
         IDLE,
@@ -20,26 +12,27 @@ public abstract class BasePresenter implements LifecycleObserver {
         ERROR
     }
 
-    protected BehaviorRelay<RequestState> requestStateObserver = BehaviorRelay.createDefault(RequestState.IDLE);
+    protected final V view;
 
     private CompositeDisposable disposables = new CompositeDisposable();
 
-    /**
-     * Contains common setup actions needed for all presenters. Subclasses may override this.
-     */
-    @CallSuper
-    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-    protected void setup() {
-        Timber.d("lifecycle resume callback.");
+    protected BasePresenter(V view) {
+        this.view = view;
     }
 
     /**
-     * Contains common teardown/cleanup actions needed for all presenters. Subclasses may override this.
+     * Contains common setup actions needed for all presenters, if any.
+     * Subclasses may override this.
      */
-    @CallSuper
-    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-    protected void cleanup() {
-        Timber.d("lifecycle destroy callback.");
+    public void start() {
+    }
+
+    /**
+     * Contains common cleanup actions needed for all presenters, if any.
+     * Subclasses may override this.
+     */
+    public void stop() {
+        disposables.clear();
     }
 
     protected void addDisposable(Disposable disposable) {

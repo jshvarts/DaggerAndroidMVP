@@ -38,24 +38,26 @@ public class LobbyActivity extends LifecycleActivity implements LobbyGreetingCon
         setContentView(R.layout.lobby_activity);
 
         ButterKnife.bind(this);
-
-        getLifecycle().addObserver(presenter);
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
         if (!TextUtils.isEmpty(greetingTextView.getText())) {
             outState.putCharSequence(BUNDLE_DATA_KEY_GREETING, greetingTextView.getText());
         }
+
+        super.onSaveInstanceState(outState);
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        if (savedInstanceState != null) {
-            greetingTextView.setText(savedInstanceState.getCharSequence(BUNDLE_DATA_KEY_GREETING));
-        }
+        greetingTextView.setText(savedInstanceState.getCharSequence(BUNDLE_DATA_KEY_GREETING));
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        presenter.stop();
     }
 
     @Override
@@ -88,12 +90,7 @@ public class LobbyActivity extends LifecycleActivity implements LobbyGreetingCon
     }
 
     @Override
-    public void displayLoadingIndicator() {
-        loadingIndicator.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void hideLoadingIndicator() {
-        loadingIndicator.setVisibility(View.GONE);
+    public void setLoadingIndicator(boolean active) {
+        loadingIndicator.setVisibility(active ? View.VISIBLE : View.GONE);
     }
 }

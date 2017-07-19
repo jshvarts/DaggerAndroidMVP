@@ -1,5 +1,6 @@
 package com.jshvarts.daggerandroidmvp.lobby;
 
+import com.jakewharton.rxrelay2.BehaviorRelay;
 import com.jshvarts.daggerandroidmvp.common.CommonGreetingUseCase;
 import com.jshvarts.daggerandroidmvp.mvp.BasePresenter;
 import com.jshvarts.daggerandroidmvp.rx.SchedulersFacade;
@@ -8,10 +9,8 @@ import io.reactivex.Observable;
 import io.reactivex.Single;
 import timber.log.Timber;
 
-class LobbyPresenter extends BasePresenter
+class LobbyPresenter extends BasePresenter<LobbyGreetingContract.LobbyView>
         implements LobbyGreetingContract.LobbyPresenter {
-
-    private final LobbyGreetingContract.LobbyView view;
 
     private final CommonGreetingUseCase commonGreetingUseCase;
 
@@ -19,11 +18,14 @@ class LobbyPresenter extends BasePresenter
 
     private final SchedulersFacade schedulersFacade;
 
+    private final BehaviorRelay<RequestState> requestStateObserver
+            = BehaviorRelay.createDefault(RequestState.IDLE);
+
     LobbyPresenter(LobbyGreetingContract.LobbyView view,
                    CommonGreetingUseCase commonGreetingUseCase,
                    LobbyGreetingUseCase lobbyGreetingUseCase,
                    SchedulersFacade schedulersFacade) {
-        this.view = view;
+        super(view);
         this.commonGreetingUseCase = commonGreetingUseCase;
         this.lobbyGreetingUseCase = lobbyGreetingUseCase;
         this.schedulersFacade = schedulersFacade;
@@ -65,13 +67,13 @@ class LobbyPresenter extends BasePresenter
                     break;
                 case LOADING:
                     view.hideGreeting();
-                    view.displayLoadingIndicator();
+                    view.setLoadingIndicator(true);
                     break;
                 case COMPLETE:
-                    view.hideLoadingIndicator();
+                    view.setLoadingIndicator(false);
                     break;
                 case ERROR:
-                    view.hideLoadingIndicator();
+                    view.setLoadingIndicator(false);
                     break;
             }
         }, Timber::e);

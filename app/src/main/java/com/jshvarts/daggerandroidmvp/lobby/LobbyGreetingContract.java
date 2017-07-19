@@ -14,8 +14,7 @@ interface LobbyGreetingContract {
         void displayGreetingError(Throwable throwable);
 
         // loading indicator actions
-        void displayLoadingIndicator();
-        void hideLoadingIndicator();
+        void setLoadingIndicator(boolean active);
     }
 
     interface LobbyPresenter {
