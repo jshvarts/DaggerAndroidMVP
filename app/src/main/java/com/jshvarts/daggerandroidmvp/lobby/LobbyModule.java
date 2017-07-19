@@ -1,6 +1,6 @@
 package com.jshvarts.daggerandroidmvp.lobby;
 
-import com.jshvarts.daggerandroidmvp.common.CommonGreetingUseCase;
+import com.jshvarts.daggerandroidmvp.common.LoadCommonGreetingUseCase;
 import com.jshvarts.daggerandroidmvp.rx.SchedulersFacade;
 
 import dagger.Module;
@@ -19,9 +19,9 @@ public class LobbyModule {
 
     @Provides
     LobbyPresenter provideLobbyPresenter(LobbyGreetingContract.LobbyView lobbyView,
-                                         CommonGreetingUseCase commonGreetingUseCase,
-                                         LobbyGreetingUseCase lobbyGreetingUseCase,
+                                         LoadCommonGreetingUseCase loadCommonGreetingUseCase,
+                                         LoadLobbyGreetingUseCase loadLobbyGreetingUseCase,
                                          SchedulersFacade schedulersFacade) {
-        return new LobbyPresenter(lobbyView, commonGreetingUseCase, lobbyGreetingUseCase, schedulersFacade);
+        return new LobbyPresenter(lobbyView, loadCommonGreetingUseCase, loadLobbyGreetingUseCase, schedulersFacade);
     }
 }

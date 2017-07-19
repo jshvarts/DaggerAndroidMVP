@@ -1,7 +1,7 @@
 package com.jshvarts.daggerandroidmvp.lobby;
 
 import com.jakewharton.rxrelay2.BehaviorRelay;
-import com.jshvarts.daggerandroidmvp.common.CommonGreetingUseCase;
+import com.jshvarts.daggerandroidmvp.common.LoadCommonGreetingUseCase;
 import com.jshvarts.daggerandroidmvp.mvp.BasePresenter;
 import com.jshvarts.daggerandroidmvp.rx.SchedulersFacade;
 
@@ -12,9 +12,9 @@ import timber.log.Timber;
 class LobbyPresenter extends BasePresenter<LobbyGreetingContract.LobbyView>
         implements LobbyGreetingContract.LobbyPresenter {
 
-    private final CommonGreetingUseCase commonGreetingUseCase;
+    private final LoadCommonGreetingUseCase loadCommonGreetingUseCase;
 
-    private final LobbyGreetingUseCase lobbyGreetingUseCase;
+    private final LoadLobbyGreetingUseCase loadLobbyGreetingUseCase;
 
     private final SchedulersFacade schedulersFacade;
 
@@ -22,12 +22,12 @@ class LobbyPresenter extends BasePresenter<LobbyGreetingContract.LobbyView>
             = BehaviorRelay.createDefault(RequestState.IDLE);
 
     LobbyPresenter(LobbyGreetingContract.LobbyView view,
-                   CommonGreetingUseCase commonGreetingUseCase,
-                   LobbyGreetingUseCase lobbyGreetingUseCase,
+                   LoadCommonGreetingUseCase loadCommonGreetingUseCase,
+                   LoadLobbyGreetingUseCase loadLobbyGreetingUseCase,
                    SchedulersFacade schedulersFacade) {
         super(view);
-        this.commonGreetingUseCase = commonGreetingUseCase;
-        this.lobbyGreetingUseCase = lobbyGreetingUseCase;
+        this.loadCommonGreetingUseCase = loadCommonGreetingUseCase;
+        this.loadLobbyGreetingUseCase = loadLobbyGreetingUseCase;
         this.schedulersFacade = schedulersFacade;
 
         observeRequestState();
@@ -35,12 +35,12 @@ class LobbyPresenter extends BasePresenter<LobbyGreetingContract.LobbyView>
 
     @Override
     public void loadCommonGreeting() {
-        loadGreeting(commonGreetingUseCase.loadGreeting());
+        loadGreeting(loadCommonGreetingUseCase.execute());
     }
 
     @Override
     public void loadLobbyGreeting() {
-        loadGreeting(lobbyGreetingUseCase.loadGreeting());
+        loadGreeting(loadLobbyGreetingUseCase.execute());
     }
 
     private void loadGreeting(Single<String> greetingSingle) {

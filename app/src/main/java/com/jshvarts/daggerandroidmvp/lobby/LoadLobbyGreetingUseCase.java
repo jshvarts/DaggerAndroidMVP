@@ -4,15 +4,15 @@ import javax.inject.Inject;
 
 import io.reactivex.Single;
 
-class LobbyGreetingUseCase {
+class LoadLobbyGreetingUseCase {
     private final LobbyGreetingRepository greetingRepository;
 
     @Inject
-    LobbyGreetingUseCase(LobbyGreetingRepository greetingRepository) {
+    LoadLobbyGreetingUseCase(LobbyGreetingRepository greetingRepository) {
         this.greetingRepository = greetingRepository;
     }
 
-    Single<String> loadGreeting() {
+    Single<String> execute() {
         return greetingRepository.getGreeting();
     }
 }
