@@ -4,7 +4,6 @@ project.ext {
     supportLibraryVersion = "25.4.0"
     daggerVersion = "2.11"
     butterKnifeVersion = "8.5.1"
-    lifecycleVersion = "1.0.0-alpha3"
     rxJavaVersion = "2.1.0"
     rxAndroidVersion = "2.0.1"
     rxRelayVersion = "2.0.0"
@@ -52,11 +51,6 @@ dependencies {
     // ButterKnife
     compile "com.jakewharton:butterknife:$project.butterKnifeVersion"
     annotationProcessor "com.jakewharton:butterknife-compiler:$project.butterKnifeVersion"
-
-    // Lifecycle
-    compile "android.arch.lifecycle:runtime:$project.lifecycleVersion"
-    compile "android.arch.lifecycle:extensions:$project.lifecycleVersion"
-    annotationProcessor "android.arch.lifecycle:compiler:$project.lifecycleVersion"
 
     // ReactiveX
     compile "io.reactivex.rxjava2:rxjava:$project.rxJavaVersion"

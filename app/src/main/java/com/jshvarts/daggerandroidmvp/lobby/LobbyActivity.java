@@ -1,7 +1,7 @@
 package com.jshvarts.daggerandroidmvp.lobby;
 
-import android.arch.lifecycle.LifecycleActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -18,7 +18,7 @@ import butterknife.OnClick;
 import dagger.android.AndroidInjection;
 import timber.log.Timber;
 
-public class LobbyActivity extends LifecycleActivity implements LobbyGreetingContract.LobbyView {
+public class LobbyActivity extends AppCompatActivity implements LobbyGreetingContract.LobbyView {
 
     private static final String BUNDLE_DATA_KEY_GREETING = "greeting";
 
